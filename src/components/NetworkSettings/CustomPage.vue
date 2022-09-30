@@ -182,7 +182,7 @@ export default class CustomPage extends Vue {
         let validNetId = credNum || noCredNum
 
         if (!validNetId) {
-            this.err = '@savannah-labs/savannahjs Network Not Found'
+            this.err = 'Savannah Network Not Found'
             return
         }
 
