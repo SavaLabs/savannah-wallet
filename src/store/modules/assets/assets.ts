@@ -24,11 +24,14 @@ import {
     UTXO as AVMUTXO,
     UTXO,
     NFTMintOutput,
-} from 'avalanche/dist/apis/avm'
-import { UnixNow } from 'avalanche/dist/utils'
-import { BN } from 'avalanche'
-import { UTXOSet as PlatformUTXOSet } from 'avalanche/dist/apis/platformvm/utxos'
-import { PlatformVMConstants, StakeableLockOut } from 'avalanche/dist/apis/platformvm'
+} from '@savannah-labs/savannahjs/dist/apis/avm'
+import { UnixNow } from '@savannah-labs/savannahjs/dist/utils'
+import { BN } from '@savannah-labs/savannahjs'
+import { UTXOSet as PlatformUTXOSet } from '@savannah-labs/savannahjs/dist/apis/platformvm/utxos'
+import {
+    PlatformVMConstants,
+    StakeableLockOut,
+} from '@savannah-labs/savannahjs/dist/apis/platformvm'
 import axios from 'axios'
 import Erc20Token from '@/js/Erc20Token'
 import { AvaNetwork } from '@/js/AvaNetwork'
@@ -372,7 +375,7 @@ const assets_module: Module<AssetsState, RootState> = {
 
         // What is the AVA coin in the network
         async updateAvaAsset({ state, commit }) {
-            const res = await avm.getAssetDescription('AVAX')
+            const res = await avm.getAssetDescription('FUEL')
             const id = bintools.cb58Encode(res.assetID)
             state.AVA_ASSET_ID = id
             const asset = new AvaAsset(id, res.name, res.symbol, res.denomination)
@@ -535,7 +538,7 @@ const assets_module: Module<AssetsState, RootState> = {
                     asset.addBalanceMultisig(balanceAmt.multisig)
                 }
 
-                // Add extras for AVAX token
+                // Add extras for FUEL token
                 // @ts-ignore
                 if (asset.id === state.AVA_ASSET_ID) {
                     asset.addExtra(getters.walletStakingBalance)
@@ -608,7 +611,7 @@ const assets_module: Module<AssetsState, RootState> = {
 
             const now = UnixNow()
 
-            // The only type of asset is AVAX on the P chain
+            // The only type of asset is FUEL on the P chain
 
             const utxos = utxoSet.getAllUTXOs()
             for (let n = 0; n < utxos.length; n++) {

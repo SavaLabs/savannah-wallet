@@ -16,16 +16,16 @@
 
                         <p>
                             Export Fee
-                            <span>{{ exportFee.toLocaleString() }} AVAX</span>
+                            <span>{{ exportFee.toLocaleString() }} FUEL</span>
                         </p>
                         <p>
                             Import Fee
-                            <span>{{ importFee.toLocaleString() }} AVAX</span>
+                            <span>{{ importFee.toLocaleString() }} FUEL</span>
                         </p>
                         <p>
                             <b>
                                 Total
-                                <span>{{ fee.toLocaleString() }} AVAX</span>
+                                <span>{{ fee.toLocaleString() }} FUEL</span>
                             </b>
                         </p>
                     </div>
@@ -121,7 +121,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import Dropdown from '@/components/misc/Dropdown.vue'
 import AvaxInput from '@/components/misc/AvaxInput.vue'
 import AvaAsset from '@/js/AvaAsset'
-import { BN } from 'avalanche'
+import { BN } from '@savannah-labs/savannahjs'
 import { avm, cChain, pChain } from '@/AVA'
 import MnemonicWallet from '@/js/wallets/MnemonicWallet'
 import Spinner from '@/components/misc/Spinner.vue'
@@ -145,7 +145,7 @@ import {
     bnToBigAvaxC,
     bigToBN,
     avaxCtoX,
-} from '@avalabs/avalanche-wallet-sdk'
+} from '@savannah-labs/savannah-wallet-sdk'
 
 const IMPORT_DELAY = 5000 // in ms
 const BALANCE_DELAY = 2000 // in ms
@@ -276,7 +276,7 @@ export default class ChainTransfer extends Vue {
     }
 
     /**
-     * Returns the import fee in nAVAX
+     * Returns the import fee in nFUEL
      */
     get importFeeBN(): BN {
         return bigToBN(this.importFee, 9)
@@ -291,7 +291,7 @@ export default class ChainTransfer extends Vue {
     }
 
     /**
-     * The maximum amount that can be transferred in nAVAX
+     * The maximum amount that can be transferred in nFUEL
      */
     get maxAmt(): BN {
         let max = this.balanceBN.sub(this.feeBN)

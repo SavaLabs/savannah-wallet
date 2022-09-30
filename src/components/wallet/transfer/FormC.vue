@@ -58,7 +58,7 @@
             <div class="fees" v-if="isConfirm">
                 <p>
                     {{ $t('transfer.fee_tx') }}
-                    <span>{{ maxFeeText }} AVAX</span>
+                    <span>{{ maxFeeText }} FUEL</span>
                 </p>
                 <p>
                     <span>${{ maxFeeUSD.toLocaleString(2) }} USD</span>
@@ -134,12 +134,12 @@ import {
     bnToBigAvaxX,
     bnToBigAvaxC,
     bnToAvaxC,
-} from '@avalabs/avalanche-wallet-sdk'
+} from '@savannah-labs/savannah-wallet-sdk'
 
 // @ts-ignore
-import { QrInput } from '@avalabs/vue_components'
+import { QrInput } from '@savannah-labs/vue_components'
 import Big from 'big.js'
-import { BN } from 'avalanche'
+import { BN } from '@savannah-labs/savannahjs'
 import { bnToBig } from '@/helpers/helper'
 import { web3 } from '@/evm'
 import EVMInputDropdown from '@/components/misc/EVMInputDropdown/EVMInputDropdown.vue'
@@ -234,7 +234,7 @@ export default class FormC extends Vue {
     }
 
     get symbol(): string {
-        if (this.formToken === 'native') return 'AVAX'
+        if (this.formToken === 'native') return 'FUEL'
         return this.formToken.data.symbol
     }
 

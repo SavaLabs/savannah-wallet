@@ -8,7 +8,7 @@ import EthereumjsCommon from '@ethereumjs/common'
 import { Transaction } from '@ethereumjs/tx'
 
 import moment from 'moment'
-import { Buffer, BN } from 'avalanche'
+import { Buffer, BN } from '@savannah-labs/savannahjs'
 import HDKey from 'hdkey'
 import { ava, avm, bintools, cChain, pChain } from '@/AVA'
 const bippath = require('bip32-path')
@@ -16,7 +16,11 @@ import createHash from 'create-hash'
 import store from '@/store'
 import { importPublic, publicToAddress, bnToRlp, rlp } from 'ethereumjs-util'
 
-import { UTXO as AVMUTXO, UTXO, UTXOSet as AVMUTXOSet } from 'avalanche/dist/apis/avm/utxos'
+import {
+    UTXO as AVMUTXO,
+    UTXO,
+    UTXOSet as AVMUTXOSet,
+} from '@savannah-labs/savannahjs/dist/apis/avm/utxos'
 import { AvaWalletCore } from '@/js/wallets/types'
 import { ITransaction } from '@/components/wallet/transfer/types'
 import {
@@ -27,7 +31,7 @@ import {
     Tx as AVMTx,
     UnsignedTx as AVMUnsignedTx,
     ImportTx as AVMImportTx,
-} from 'avalanche/dist/apis/avm'
+} from '@savannah-labs/savannahjs/dist/apis/avm'
 
 import {
     ImportTx as PlatformImportTx,
@@ -39,7 +43,7 @@ import {
     SelectCredentialClass as PlatformSelectCredentialClass,
     AddDelegatorTx,
     AddValidatorTx,
-} from 'avalanche/dist/apis/platformvm'
+} from '@savannah-labs/savannahjs/dist/apis/platformvm'
 
 import {
     UnsignedTx as EVMUnsignedTx,
@@ -49,10 +53,16 @@ import {
     EVMConstants,
     EVMInput,
     SelectCredentialClass as EVMSelectCredentialClass,
-} from 'avalanche/dist/apis/evm'
+} from '@savannah-labs/savannahjs/dist/apis/evm'
 
-import { Credential, SigIdx, Signature, UTXOResponse, Address } from 'avalanche/dist/common'
-import { getPreferredHRP, PayloadBase } from 'avalanche/dist/utils'
+import {
+    Credential,
+    SigIdx,
+    Signature,
+    UTXOResponse,
+    Address,
+} from '@savannah-labs/savannahjs/dist/common'
+import { getPreferredHRP, PayloadBase } from '@savannah-labs/savannahjs/dist/utils'
 import { HdWalletCore } from '@/js/wallets/HdWalletCore'
 import { ILedgerAppConfig } from '@/store/types'
 import { WalletNameType } from '@/js/wallets/types'
@@ -63,7 +73,7 @@ import { ParseableAvmTxEnum, ParseablePlatformEnum, ParseableEvmTxEnum } from '.
 import { ILedgerBlockMessage } from '../../store/modules/ledger/types'
 import Erc20Token from '@/js/Erc20Token'
 import { WalletHelper } from '@/helpers/wallet_helper'
-import { bnToBig, idToChainAlias } from '@avalabs/avalanche-wallet-sdk'
+import { bnToBig, idToChainAlias } from '@savannah-labs/savannah-wallet-sdk'
 
 export const MIN_EVM_SUPPORT_V = '0.5.3'
 
@@ -490,7 +500,7 @@ class LedgerWallet extends HdWalletCore implements AvaWalletCore {
 
                 messages.push({
                     title: 'Output',
-                    value: `${addr} - ${amt.toString()} AVAX`,
+                    value: `${addr} - ${amt.toString()} FUEL`,
                 })
             }
         } else {
@@ -509,7 +519,7 @@ class LedgerWallet extends HdWalletCore implements AvaWalletCore {
                         if (!changePath || changeAddr !== addr)
                             messages.push({
                                 title: 'Output',
-                                value: `${addr} - ${amt.toString()} AVAX`,
+                                value: `${addr} - ${amt.toString()} FUEL`,
                             })
                     })
             }
@@ -558,7 +568,7 @@ class LedgerWallet extends HdWalletCore implements AvaWalletCore {
             messages.push({ title: 'NodeID', value: nodeID })
             messages.push({ title: 'Start Time', value: startTime })
             messages.push({ title: 'End Time', value: endTime })
-            messages.push({ title: 'Total Stake', value: `${stakeAmt} AVAX` })
+            messages.push({ title: 'Total Stake', value: `${stakeAmt} FUEL` })
             messages.push({
                 title: 'Stake',
                 value: `${stakeAmt} to ${this.platformHelper.getCurrentAddress()}`,
@@ -595,7 +605,7 @@ class LedgerWallet extends HdWalletCore implements AvaWalletCore {
             (txType === EVMConstants.EXPORTTX && chainId === 'C') ||
             (txType === EVMConstants.IMPORTTX && chainId === 'C')
         ) {
-            messages.push({ title: 'Fee', value: `${0.001} AVAX` })
+            messages.push({ title: 'Fee', value: `${0.001} FUEL` })
         }
 
         return messages
@@ -648,7 +658,7 @@ class LedgerWallet extends HdWalletCore implements AvaWalletCore {
 
             const feeMsg: ILedgerBlockMessage = {
                 title: 'Fee',
-                value: feeNano.toLocaleString() + ' nAVAX',
+                value: feeNano.toLocaleString() + ' nFUEL',
             }
 
             msgs = [callMsg, ...paramMsgs, feeMsg]

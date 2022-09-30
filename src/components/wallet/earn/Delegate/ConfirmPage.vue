@@ -6,7 +6,7 @@
         <!--        </div>-->
         <div>
             <label>{{ $t('earn.delegate.confirmation.amount') }}</label>
-            <p>{{ amtText }} AVAX</p>
+            <p>{{ amtText }} FUEL</p>
         </div>
         <div>
             <label>{{ $t('earn.delegate.confirmation.start') }}</label>
@@ -25,7 +25,7 @@
 <script lang="ts">
 import 'reflect-metadata'
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import { BN } from 'avalanche/dist'
+import { BN } from '@savannah-labs/savannahjs/dist'
 import Big from 'big.js'
 
 @Component

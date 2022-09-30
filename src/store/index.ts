@@ -35,7 +35,7 @@ import {
 } from '@/js/Keystore'
 import { LedgerWallet } from '@/js/wallets/LedgerWallet'
 import { SingletonWallet } from '@/js/wallets/SingletonWallet'
-import { Buffer } from 'avalanche'
+import { Buffer } from '@savannah-labs/savannahjs'
 import { privateToAddress } from 'ethereumjs-util'
 import { updateFilterAddresses } from '../providers'
 import { getAvaxPriceUSD } from '@/helpers/price_helper'
@@ -281,7 +281,7 @@ export default new Vuex.Store({
 
                 const utcDate = new Date()
                 const dateString = utcDate.toISOString().replace(' ', '_')
-                const filename = `AVAX_${dateString}.json`
+                const filename = `FUEL_${dateString}.json`
 
                 const blob = new Blob([text], {
                     type: 'application/json',

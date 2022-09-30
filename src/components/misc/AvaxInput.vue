@@ -12,7 +12,7 @@
                 @change="amount_in"
             ></BigNumInput>
         </div>
-        <p class="ticker">AVAX</p>
+        <p class="ticker">FUEL</p>
         <div v-if="balance" class="balance">
             <div>
                 <p>
@@ -31,10 +31,10 @@
 <script lang="ts">
 import 'reflect-metadata'
 import { Vue, Component, Prop, Model } from 'vue-property-decorator'
-import { Big, bnToBig } from '@avalabs/avalanche-wallet-sdk'
+import { Big, bnToBig } from '@savannah-labs/savannah-wallet-sdk'
 //@ts-ignore
-import { BigNumInput } from '@avalabs/vue_components'
-import { BN } from 'avalanche'
+import { BigNumInput } from '@savannah-labs/vue_components'
+import { BN } from '@savannah-labs/savannahjs'
 import { priceDict } from '../../store/types'
 
 @Component({

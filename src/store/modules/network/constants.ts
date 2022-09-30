@@ -1,19 +1,19 @@
 import { AvaNetwork } from '@/js/AvaNetwork'
 
 export const MainnetConfig = new AvaNetwork(
-    'Mainnet',
-    'https://api.avax.network:443',
-    1,
-    'https://explorerapi.avax.network',
-    'https://explorer-xp.avax.network',
+    'Savannah',
+    'http://api.savannah.network:9650',
+    7,
+    'https://api.savannah.network:9650',
+    'https://explorer.savannah.network',
     true
 )
 
 export const TestnetConfig = new AvaNetwork(
-    'Fuji',
-    'https://api.avax-test.network:443',
-    5,
-    'https://explorerapi.avax-test.network',
-    'https://explorer-xp.avax-test.network',
+    'Marula',
+    'http://api.test.savannah.network:9650',
+    7,
+    'http://api.test.savannah.network:9650',
+    'https://explorer.test.savannah.network',
     true
 )
